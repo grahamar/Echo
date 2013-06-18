@@ -1,4 +1,4 @@
-package controllers
+package controllers.auth
 
 import play.api._
 import play.api.mvc._
@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import views._
 import models.User
+import controllers.routes
 
 object Authentication extends Controller {
 

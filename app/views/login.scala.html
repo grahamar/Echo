@@ -6,7 +6,7 @@
 
     <p>Please provide your credentials.</p>
 
-    @helper.form(routes.Authentication.authenticate) {
+    @helper.form(controllers.auth.routes.Authentication.authenticate) {
         
         @form.globalError.map { error =>
             <p class="error">
