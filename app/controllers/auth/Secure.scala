@@ -13,7 +13,7 @@ object Secure extends Controller with Secured {
     _ =>
       User.findByEmail(username).map { user =>
         Ok(
-          html.secure(user)
+          html.auth.secure(user)
         )
       }.getOrElse(Forbidden)
   }

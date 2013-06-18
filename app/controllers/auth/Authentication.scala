@@ -6,7 +6,6 @@ import play.api.data._
 import play.api.data.Forms._
 import views._
 import models.User
-import controllers.routes
 
 object Authentication extends Controller {
 
@@ -23,7 +22,7 @@ object Authentication extends Controller {
      * Login page.
      */
     def login = Action { implicit request =>
-        Ok(html.login(loginForm))
+        Ok(html.auth.login(loginForm))
     }
 
     /**
@@ -40,7 +39,7 @@ object Authentication extends Controller {
      */
     def authenticate = Action { implicit request =>
         loginForm.bindFromRequest.fold(
-            formWithErrors => BadRequest(html.login(formWithErrors)),
+            formWithErrors => BadRequest(html.auth.login(formWithErrors)),
             user => Redirect(routes.Secure.index()).withSession("email" -> user._1)
         )
     }

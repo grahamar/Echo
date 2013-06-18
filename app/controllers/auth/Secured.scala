@@ -1,7 +1,6 @@
 package controllers.auth
 
 import play.api.mvc._
-import controllers.routes
 
 /**
  * Provide security features
