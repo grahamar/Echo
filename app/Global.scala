@@ -1,5 +1,5 @@
 import play.api._
-import models.User
+import models._
 
 object Global extends GlobalSettings {
 
@@ -12,10 +12,11 @@ object Global extends GlobalSettings {
 object InitialData {
 
     def setup() = {
-        if (User.findAll.isEmpty) {
+        if (Account.findAll.isEmpty) {
             Seq(
-                User("admin@redhogs.net", "System Administrator", "secret")
-            ).foreach(User.create);
+                Account(1, "admin@redhogs.net", "secret", "System Administrator", Administrator),
+                Account(2, "grhodes@informationmosaic.com", "secret", "Bob", NormalUser)
+            ) foreach Account.create
         }
     }
 
