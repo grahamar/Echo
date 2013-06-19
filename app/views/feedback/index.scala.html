@@ -1,0 +1,13 @@
+@(title: String)(implicit template: String => Html => Html)
+
+@template(title) {
+<div class="tabbable tabs-left">
+  	<ul class="nav nav-tabs">
+  		<li class="active"><a href="#lA" data-toggle="tab">My Feedback</a></li>
+  		<li><a href="#lA" data-toggle="tab">Leave Feedback</a></li>
+  		<li><a href="#lA" data-toggle="tab">Sent Feedback</a></li>
+  	</ul>
+  	<div class="tab-content">
+  	</div>
+</div>
+}

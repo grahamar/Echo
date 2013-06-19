@@ -1,6 +1,6 @@
 html, body {
 	height: 100%;
-    background-color: #f5f5f5;
+	background-color: #fff;
 }
 
 .form-signin {
@@ -29,9 +29,7 @@ html, body {
 }
 
 /* Sticky footer styles
-      -------------------------------------------------- */
-
-  
+-------------------------------------------------- */
 
 /* Wrapper for page content to push down footer */
 #wrap {
@@ -60,16 +58,16 @@ html, body {
     }
 }
 
+/* Custom page CSS
+-------------------------------------------------- */
 
-
-  /* Custom page CSS
-  -------------------------------------------------- */
-  /* Not required for template or sticky footer method. */
-
-  .container {
+.container {
     width: auto;
     max-width: 680px;
-  }
-  .container .credit {
-    margin: 20px 0;
-  }
+}
+.container .credit {
+	margin: 20px 0;
+}
+#content {
+	padding-top: 50px;
+}
