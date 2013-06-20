@@ -12,6 +12,6 @@ trait Administration extends Controller with Pjax with AuthElement with AuthConf
 
     def index = StackAction(AuthorityKey -> NormalUser) { implicit request =>
         val title = "Administration"
-        Ok(html.feedback.index(title))
+        Ok(html.admin.index(title))
     }
 }

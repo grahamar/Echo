@@ -12,6 +12,6 @@ trait SuggestionBox extends Controller with Pjax with AuthElement with AuthConfi
 
     def index = StackAction(AuthorityKey -> NormalUser) { implicit request =>
         val title = "Suggestion Box"
-        Ok(html.feedback.index(title))
+        Ok(html.suggestionbox.index(title))
     }
 }

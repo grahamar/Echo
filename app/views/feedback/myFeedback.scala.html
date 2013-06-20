@@ -1,0 +1,26 @@
+@(form: Form[(String, String, String)], team: List[String])
+
+<h3>My Feedback</h3>
+@helper.form(routes.Feedback.myFeedback, 'class -> "form-inline") {
+	@helper.select(
+		form("teamMember"),
+		helper.options(team),
+		'id -> "teamMembers",
+		'class -> "span3",
+		'_label -> "Team Member"
+	)
+	
+	<div style="float: right;">
+		<label class="control-label" for="fromDate">From</label>
+		<input id="fromDate" class="span2" type="text" placeholder="From" data-date-format="dd/mm/yyyy" required>
+		
+		<label class="control-label" for="toDate">To</label>
+		<input id="toDate" class="span2" type="text" placeholder="To" data-date-format="dd/mm/yyyy" required>
+		<button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+		<script type="text/javascript">
+			$('#fromDate').datepicker();
+			$('#toDate').datepicker();
+			$('#submitButton').focus();
+		</script>
+	</div>
+}
