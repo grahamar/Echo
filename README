@@ -1,4 +1,5 @@
-This is your new Play 2.1 application
-=====================================
+StaffPM is a Play! application version of https://code.google.com/p/mhe3-staffpm/
 
-This file will be packaged with your application, when using `play dist`.
+Provides a platform for organisations to record projects, tasks and the performance of their employees. Many companies give little thought to staff performance reviews and their impact on the productivity and drive they can provide to staff. Echo allows users to track their projects and their progress within them. Combining a clean, fast interface for capturing and organising tasks, Echo allows staff members to receive regular feedback from their managers and team leaders. The feedback staff members receive is stored and can be retrieved for any time-period or time-scale and exported to Microsoft Excel files including the charts generated and displayed to the users within Echo.
+
+Echo allows users to manage all of their projects in one place, and to focus on the task at hand without ever losing sight of the big picture. This provides a flexible project management tool whether you are tracking tasks for a single project, or running countless projects throughout your entire company. Task workflows allow any business process to manage tasks, track activity therefore ensuring you meet your deadlines, increase productivity and provide a more enthusiastic environment for all employees.
