@@ -10,6 +10,7 @@ import play.api.data.Forms._
 import play.api.mvc._
 import models.Account
 import java.util.Date
+import play.api.libs.json.Json
 
 object Feedback extends Feedback {}
 
@@ -23,10 +24,11 @@ trait Feedback extends Controller with Pjax with AuthElement with AuthConfigImpl
     }
 
     def index = StackAction(AuthorityKey -> NormalUser) { implicit request =>
-        Ok(html.feedback.index(title, team))
+        val subject = loggedIn;
+        Ok(html.feedback.index(title, team, subject))
     }
     
-    def myFeedback = Action { implicit request =>
+    def myFeedback = StackAction(AuthorityKey -> NormalUser) { implicit request =>
         myFeedbackForm.bindFromRequest.fold(
             formWithErrors => { 
                 println(formWithErrors);
@@ -37,7 +39,22 @@ trait Feedback extends Controller with Pjax with AuthElement with AuthConfigImpl
     
     def updateMyFeedback(data : (String, String, String)) : Result = {
         println("form eror");
+        
         Results.Ok;
     }
+    
+    def feedback(username : String) = StackAction(AuthorityKey -> NormalUser) { implicit request =>
+        println("feedback json request")
+	    Ok(Json.toJson(models.Feedback.findAllForReceiver(Account.findByUsername(Option(username)))
+           .map(f => Json.obj(
+		    	"id" -> f.id,
+		    	"receiver" -> f.receiver,
+		    	"rating" -> f.rating,
+		    	"comment" -> f.comment,
+		    	"originalSender" -> f.originalsender,
+		    	"createdBy" -> f.createdby,
+		    	"created" -> f.created
+		    ))))
+	}
 
 }

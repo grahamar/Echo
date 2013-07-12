@@ -1,4 +1,4 @@
-@(title: String, team: List[String])(implicit template: String => Html => Html)
+@(title: String, team: List[String], subject : Account)(implicit template: String => Html => Html)
 
 @template(title) {
 <div class="tabbable tabs-left">
@@ -8,7 +8,7 @@
   		<li><a href="#sentFeedback" data-toggle="tab">Sent Feedback</a></li>
   	</ul>
   	<div class="tab-content">
-  		<div class="tab-pane active" id="myFeedback">@myFeedback(controllers.Feedback.myFeedbackForm, team)</div>
+  		<div class="tab-pane active" id="myFeedback">@myFeedback(controllers.Feedback.myFeedbackForm, team, subject)</div>
   		<div class="tab-pane" id="leaveFeedback">@leaveFeedback()</div>
   		<div class="tab-pane" id="sentFeedback">@sentFeedback()</div>
   	</div>

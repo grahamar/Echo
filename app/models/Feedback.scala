@@ -1,7 +1,9 @@
 package models
 
 import java.util.Date
-import scalikejdbc._, SQLInterpolation._
+import scalikejdbc._
+import SQLInterpolation._
+import play.api.libs.json._
 
 case class Feedback (
     id : Int,
@@ -13,7 +15,7 @@ case class Feedback (
     created : Date
 )
 
-object Feedback extends SQLSyntaxSupport[Feedback] {
+object Feedback extends SQLSyntaxSupport[Feedback] with Writes[Feedback] {
 
     val a = syntax("a")
 
@@ -38,11 +40,27 @@ object Feedback extends SQLSyntaxSupport[Feedback] {
         select.from(Feedback as a)
     }.map(Feedback(a)).list.apply()
 
+    def findAllForReceiver(account : Option[Account])(implicit s : DBSession = auto) : Seq[Feedback] = withSQL {
+        select.from(Feedback as a).where.eq(a.receiver, account.get.id)
+    }.map(Feedback(a)).list.apply()
+    
     def create(feedback : Feedback)(implicit s : DBSession = auto) {
         withSQL {
             import feedback._
             insert.into(Feedback).values(id, receiver, rating, comment, originalsender, createdby, created)
         }.update.apply()
+    }
+    
+    implicit def writes(f : Feedback) : JsValue = {
+        Json.obj(
+	    	"id" -> f.id,
+	    	"receiver" -> f.receiver,
+	    	"rating" -> f.rating,
+	    	"comment" -> f.comment,
+	    	"originalSender" -> f.originalsender,
+	    	"createdBy" -> f.createdby,
+	    	"created" -> f.created
+	    )
     }
     
 };

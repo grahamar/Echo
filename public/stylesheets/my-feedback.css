@@ -1,0 +1,105 @@
+#feedback-content h1 {
+  font-size: 96px;
+  margin-top: .3em;
+  margin-bottom: 0;
+}
+
+#feedback-content h1 + h2 {
+  margin-top: 0;
+}
+
+#feedback-content h2 {
+  font-weight: 400;
+  font-size: 28px;
+}
+
+#feedback-content h1, #feedback-content h2 {
+  font-family: "Yanone Kaffeesatz";
+  text-rendering: optimizeLegibility;
+}
+
+#feedback-content > p {
+  line-height: 1.5em;
+  width: 640px;
+  text-rendering: optimizeLegibility;
+}
+
+#feedback-content #charts {
+  padding: 10px 0;
+}
+
+#feedback-content .chart {
+  display: inline-block;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+#feedback-content .reset {
+  padding-left: 1em;
+  font-size: smaller;
+  color: #ccc;
+}
+
+#feedback-content .background.bar {
+  fill: #ccc;
+}
+
+#feedback-content .foreground.bar {
+  fill: steelblue;
+}
+
+#feedback-content .axis path, #feedback-content .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#feedback-content .axis text {
+  font: 10px sans-serif;
+}
+
+#feedback-content .brush rect.extent {
+  fill: steelblue;
+  fill-opacity: .125;
+}
+
+#feedback-content .brush .resize path {
+  fill: #eee;
+  stroke: #666;
+}
+
+#feedback-content #date-chart {
+  width: 100%;
+}
+
+#feedback-list {
+  min-height: 1024px;
+}
+
+#feedback-content #feedback-list .date,
+#feedback-content #feedback-list .day {
+  margin-bottom: .4em;
+}
+
+#feedback-content #feedback-list .feedback {
+  line-height: 1.5em;
+  background: #eee;
+  width: 640px;
+  margin-bottom: 1px;
+}
+
+#feedback-content #feedback-list .time {
+  color: #999;
+}
+
+#feedback-content #feedback-list .feedback div {
+  display: inline-block;
+  width: 100px;
+}
+
+#feedback-content aside {
+  position: absolute;
+  left: 740px;
+  font-size: smaller;
+  width: 220px;
+}

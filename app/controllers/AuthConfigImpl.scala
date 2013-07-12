@@ -27,14 +27,17 @@ trait AuthConfigImpl extends AuthConfig {
 
     def resolveUser(id : Id) = Account.findById(id)
 
-    def loginSucceeded(request : RequestHeader) = Redirect(routes.Dashboard.index)
-
     def logoutSucceeded(request : RequestHeader) = Redirect(routes.Application.login)
 
-    def authenticationFailed(request : RequestHeader) = Redirect(routes.Application.login)
-
+	def loginSucceeded(request: RequestHeader): Result = {
+	  val uri = request.session.get("access_uri").getOrElse(routes.Dashboard.index.url.toString)
+	  Redirect(uri).withSession(request.session - "access_uri")
+	}
+    
     def authorizationFailed(request : RequestHeader) = Forbidden("no permission")
-
+    
+    def authenticationFailed(request: RequestHeader): Result = Redirect(routes.Application.login).withSession("access_uri" -> request.uri)
+	
     def authorize(user : User, authority : Authority) = (user.permission, authority) match {
         case (Administrator, _)       => true
         case (NormalUser, NormalUser) => true

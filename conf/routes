@@ -13,6 +13,7 @@ GET    /logout                                      controllers.Application.logo
 GET    /secure/dashboard                            controllers.Dashboard.index
 
 #Feedback
+GET    /secure/feedback/:username                   controllers.Feedback.feedback(username)
 GET    /secure/feedback                             controllers.Feedback.index
 POST   /secure/feedback                             controllers.Feedback.myFeedback
 

@@ -16,8 +16,8 @@ import jp.t2v.lab.play2.stackc.{ RequestWithAttributes, RequestAttributeKey, Sta
 object Application extends Controller with LoginLogout with AuthConfigImpl {
 
     val loginForm = Form {
-        mapping("email" -> email, "password" -> text)(Account.authenticate)(_.map(u => (u.email, "")))
-            .verifying("Invalid email or password", result => result.isDefined)
+        mapping("username" -> text, "password" -> text)(Account.authenticate)(_.map(u => (u.username, "")))
+            .verifying("Invalid username or password", result => result.isDefined)
     }
 
     def login = Action { implicit request =>
