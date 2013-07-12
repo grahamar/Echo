@@ -34,7 +34,6 @@
 	</div>
 	
 	<script type="text/javascript">
-	// (It's CSV, but GitHub Pages only gzip's JSON at the moment.)
 	d3.json("@routes.Feedback.feedback(subject.username)", function(error, feedbacks) {
 	
 	  // Various formatters.
@@ -45,7 +44,9 @@
 	
 	  // A nest operator, for grouping the feedback list.
 	  var nestByDate = d3.nest()
-	      .key(function(d) { return d3.time.day(d.date); });
+	      .key(function(d) { 
+	      	return d3.time.day(d.date);
+	      });
 	
 	  // A little coercion, since the JSON is untyped.
 	  feedbacks.forEach(function(f, i) {
@@ -62,7 +63,6 @@
 	      hours = hour.group(Math.floor);
 	
 	  var charts = [
-	
 	    barChart()
 	        .dimension(date)
 	        .group(dates)
@@ -70,7 +70,6 @@
 	      .x(d3.time.scale()
 	        .domain([new Date(2013, 0, 1), new Date(2013, 7, 1)])
 	        .rangeRound([0, 10 * 90]))
-	
 	  ];
 	
 	  // Given our array of charts, which we assume are in the same order as the
@@ -78,7 +77,10 @@
 	  // We also listen to the chart's brush events to update the display.
 	  var chart = d3.selectAll(".chart")
 	      .data(charts)
-	      .each(function(chart) { chart.on("brush", renderAll).on("brushend", renderAll); });
+	      .each(function(chart) { 
+	      		chart.on("brush", renderAll).on("brushend", renderAll);
+	      	
+	      });
 	
 	  // Render the initial lists.
 	  var list = d3.selectAll(".list")
@@ -157,9 +159,11 @@
 	  }
 	
 	  function barChart() {
-	    if (!barChart.id) barChart.id = 0;
+	    if (!barChart.id) {
+	      barChart.id = 0;
+	    }
 	
-	    var margin = {top: 10, right: 10, bottom: 20, left: 10},
+	    var margin = {top: 10, right: 10, bottom: 20, left: 20},
 	        x,
 	        y = d3.scale.linear().range([100, 0]),
 	        id = barChart.id++,
@@ -171,8 +175,8 @@
 	        round;
 	
 	    function chart(div) {
-	      var width = x.range()[1],
-	          height = y.range()[0];
+	      var width = $("#date-chart").width(),
+	          height = y.range()[0] + 150;
 	
 	      y.domain([0, group.top(1)[0].value]);
 	
@@ -189,7 +193,7 @@
 	              .style("display", "none");
 	
 	          g = div.append("svg")
-	              .attr("width", width + margin.left + margin.right)
+	              .attr("width", width)
 	              .attr("height", height + margin.top + margin.bottom)
 	            .append("g")
 	              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -241,10 +245,7 @@
 	      });
 	
 	      function barPath(groups) {
-	        var path = [],
-	            i = -1,
-	            n = groups.length,
-	            d;
+	        var path = [], i = -1, n = groups.length, d;
 	        while (++i < n) {
 	          d = groups[i];
 	          path.push("M", x(d.key), ",", height, "V", y(d.value), "h9V", height);
@@ -274,12 +275,13 @@
 	    });
 	
 	    brush.on("brush.chart", function() {
-	      var g = d3.select(this.parentNode),
-	          extent = brush.extent();
-	      if (round) g.select(".brush")
+	      var g = d3.select(this.parentNode), extent = brush.extent();
+	      if (round){ 
+	      	g.select(".brush")
 	          .call(brush.extent(extent = extent.map(round)))
-	        .selectAll(".resize")
+	          .selectAll(".resize")
 	          .style("display", null);
+	      }
 	      g.select("#clip-" + id + " rect")
 	          .attr("x", x(extent[0]))
 	          .attr("width", x(extent[1]) - x(extent[0]));
@@ -296,13 +298,17 @@
 	    });
 	
 	    chart.margin = function(_) {
-	      if (!arguments.length) return margin;
+	      if (!arguments.length) {
+	      	return margin;
+	      }
 	      margin = _;
 	      return chart;
 	    };
 	
 	    chart.x = function(_) {
-	      if (!arguments.length) return x;
+	      if (!arguments.length) {
+	        return x;
+	      }
 	      x = _;
 	      axis.scale(x);
 	      brush.x(x);
@@ -310,13 +316,17 @@
 	    };
 	
 	    chart.y = function(_) {
-	      if (!arguments.length) return y;
+	      if (!arguments.length) {
+	        return y;
+	      }
 	      y = _;
 	      return chart;
 	    };
 	
 	    chart.dimension = function(_) {
-	      if (!arguments.length) return dimension;
+	      if (!arguments.length) {
+	        return dimension;
+	      }
 	      dimension = _;
 	      return chart;
 	    };
@@ -334,13 +344,17 @@
 	    };
 	
 	    chart.group = function(_) {
-	      if (!arguments.length) return group;
+	      if (!arguments.length) {
+	      	return group;
+	      }
 	      group = _;
 	      return chart;
 	    };
 	
 	    chart.round = function(_) {
-	      if (!arguments.length) return round;
+	      if (!arguments.length) {
+	      	return round;
+	      }
 	      round = _;
 	      return chart;
 	    };
