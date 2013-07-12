@@ -19,7 +19,7 @@ trait Feedback extends Controller with Pjax with AuthElement with AuthConfigImpl
     val team = List("Graham", "Alison");
     
     val myFeedbackForm = Form {
-        tuple("teamMembers" -> text, "fromDate" -> date, "toDate" -> date)
+        tuple("teamMembers" -> text, "fromDate" -> text, "toDate" -> text)
     }
 
     def index = StackAction(AuthorityKey -> NormalUser) { implicit request =>
@@ -35,7 +35,7 @@ trait Feedback extends Controller with Pjax with AuthElement with AuthConfigImpl
         )
     }
     
-    def updateMyFeedback(data : (String, Date, Date)) : Result = {
+    def updateMyFeedback(data : (String, String, String)) : Result = {
         println("form eror");
         Results.Ok;
     }

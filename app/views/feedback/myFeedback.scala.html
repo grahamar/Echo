@@ -1,14 +1,15 @@
 @(form: Form[(String, String, String)], team: List[String])
 
+@import helper.twitterBootstrap._
+
 <h3>My Feedback</h3>
 @helper.form(routes.Feedback.myFeedback, 'class -> "form-inline") {
-	@helper.select(
-		form("teamMember"),
-		helper.options(team),
-		'id -> "teamMembers",
-		'class -> "span3",
-		'_label -> "Team Member"
-	)
+	<label class="control-label" for="teamMembers">Team Member</label>
+	<select id="teamMembers" class="span3"required>
+		@for(member <- team) {
+		  <option>@member</option>
+		}
+	</select>
 	
 	<div style="float: right;">
 		<label class="control-label" for="fromDate">From</label>

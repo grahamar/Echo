@@ -8,8 +8,8 @@ case class Feedback (
     receiver : Int,
     rating : Int,
     comment : String,
-    originalSender : Int,
-    createdBy : Int,
+    originalsender : Int,
+    createdby : Int,
     created : Date
 )
 
@@ -23,8 +23,8 @@ object Feedback extends SQLSyntaxSupport[Feedback] {
         receiver = rs.int(a.receiver),
         rating = rs.int(a.rating),
         comment = rs.string(a.comment),
-        originalSender = rs.int(a.originalSender),
-        createdBy = rs.int(a.createdBy),
+        originalsender = rs.int(a.originalsender),
+        createdby = rs.int(a.createdby),
         created = rs.date(a.created)
     )
 
@@ -41,7 +41,7 @@ object Feedback extends SQLSyntaxSupport[Feedback] {
     def create(feedback : Feedback)(implicit s : DBSession = auto) {
         withSQL {
             import feedback._
-            insert.into(Feedback).values(id, receiver, rating, comment, originalSender, createdBy, created)
+            insert.into(Feedback).values(id, receiver, rating, comment, originalsender, createdby, created)
         }.update.apply()
     }
     
